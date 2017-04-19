@@ -21,7 +21,8 @@ public class InjectRandomIntBeanFactoryPostProcessor implements BeanPostProcesso
 
     @Override
     public Object postProcessBeforeInitialization(Object o, String s) throws BeansException {
-        Field[] declaredFields = o.getClass().getDeclaredFields();
+        Class<?> beanClass = o.getClass();
+        Field[] declaredFields = beanClass.getDeclaredFields();
 
         for (Field field : declaredFields) {
             InjectRandomInt annotation = field.getAnnotation(InjectRandomInt.class);
@@ -35,14 +36,27 @@ public class InjectRandomIntBeanFactoryPostProcessor implements BeanPostProcesso
 
                 field.setAccessible(true);
                 ReflectionUtils.setField(field, o, randomInt);
+
+                map.put(s, beanClass);
             }
         }
+
+        System.out.println("postProcessBeforeInitialization BeanName = " + s + beanClass.getName());
 
         return o;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
+/*        Class beanClass = map.get(s);
+
+        if (beanClass != null) {
+            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> method.invoke(o, args));
+        }*/
+
+        System.out.println("postProcessAfterInitialization BeanName = " + s + o.toString());
+        System.out.println("map size = " + map.size());
+
         return o;
     }
 }

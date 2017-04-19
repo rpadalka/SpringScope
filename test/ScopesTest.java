@@ -1,4 +1,3 @@
-import api.NamedBean;
 import bean.PeriodicalScopeBean;
 import bean.PeriodicalScopeNamedBean;
 import org.junit.Test;
@@ -12,13 +11,13 @@ public class ScopesTest {
     public void test() {
         ClassPathXmlApplicationContext xmlApplicationContext = new ClassPathXmlApplicationContext("xmlConfigAppContext.xml");
 
+        /*NamedBean namedBean = xmlApplicationContext.getBean("periodicalScopeNamedBean", NamedBean.class);*/
         PeriodicalScopeNamedBean periodicalScopeNamedBean = xmlApplicationContext.getBean("periodicalScopeNamedBean", PeriodicalScopeNamedBean.class);
-        NamedBean namedBean = xmlApplicationContext.getBean("periodicalScopeNamedBean", NamedBean.class);
         PeriodicalScopeBean periodicalScopeBean = xmlApplicationContext.getBean("periodicalScopeBean", PeriodicalScopeBean.class);
 
         System.out.println("\n");
+        /*System.out.println("namedBean = " + namedBean.getClassName());*/
         System.out.println("periodicalScopeNamedBean = " + periodicalScopeNamedBean.getClassName());
-        System.out.println("namedBean = " + namedBean.getClassName());
         System.out.println("periodicalScopeBean = " + periodicalScopeBean.getClassName());
         System.out.println("\n");
         System.out.println("periodicalScopeNamedBean.randomIntValue = " + periodicalScopeNamedBean.getRandomInt());
