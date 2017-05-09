@@ -7,6 +7,9 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="postprocessor"/>
+    <!--<context:component-scan base-package="postprocessor" scoped-proxy="no"/>
+    <context:component-scan base-package="postprocessor" scoped-proxy="interfaces"/>
+    <context:component-scan base-package="postprocessor" scoped-proxy="targetClass"/>-->
     <context:component-scan base-package="bean"/>
 
     <context:property-placeholder location="test.properties"/>
