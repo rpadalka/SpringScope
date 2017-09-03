@@ -7,9 +7,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+/*import java.lang.reflect.Proxy;*/
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+/*import org.springframework.cglib.proxy.Proxy;*/
 
 /**
  * Created by rpadalka on 4/5/17.
@@ -48,7 +51,7 @@ public class InjectRandomIntBeanFactoryPostProcessor implements BeanPostProcesso
 
     @Override
     public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
-/*        Class beanClass = map.get(s);
+        /*Class beanClass = map.get(s);
 
         if (beanClass != null) {
             return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> method.invoke(o, args));
