@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Scope("periodical")
 public class PeriodicalScopeNamedBean implements NamedBean {
 
-    @Value("${key}")
+    @Value("${keyPeriodicalNamedScope}")
     private String value;
     @InjectRandomInt(min = 1, max = 10)
     private int randomInt;
 
     @Override
-    public String getClassName() {
-        return this.getClass().getName() + " value = '" + value + "'";
+    public String getValues() {
+        return this.getClass().getName() + "\n" + "value = '" + value + "'";
     }
 
     public int getRandomInt() {

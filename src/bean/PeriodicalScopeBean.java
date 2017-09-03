@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 @Scope("periodical")
 public final class PeriodicalScopeBean {
 
-    @Value("${key}")
+    @Value("${keyPeriodicalScope}")
     private String value;
     @InjectRandomInt(min = 1, max = 10)
     private int randomInt;
 
-    public String getClassName() {
-        return this.getClass().getName() + " value = '" + value + "'";
+    public String getValues() {
+        return this.getClass().getName() + "\n" + "value = '" + value + "'";
     }
 
     public int getRandomInt() {

@@ -24,6 +24,8 @@ public class InjectRandomIntBeanFactoryPostProcessor implements BeanPostProcesso
 
     @Override
     public Object postProcessBeforeInitialization(Object o, String s) throws BeansException {
+        System.out.println("BeanFactoryPostProcessor postProcessBeforeInitialization");
+
         Class<?> beanClass = o.getClass();
         Field[] declaredFields = beanClass.getDeclaredFields();
 
@@ -44,22 +46,34 @@ public class InjectRandomIntBeanFactoryPostProcessor implements BeanPostProcesso
             }
         }
 
-        System.out.println("postProcessBeforeInitialization BeanName = " + s + beanClass.getName());
+        showBeanInfo(o, s);
 
         return o;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
-        /*Class beanClass = map.get(s);
+        System.out.println("BeanFactoryPostProcessor postProcessAfterInitialization");
 
-        if (beanClass != null) {
-            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> method.invoke(o, args));
+        Class beanClass = map.get(s);
+
+        /*if (beanClass != null) {
+            Object proxyInstance = Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> method.invoke(o, args));
+            showBeanInfo(proxyInstance, s);
+            System.out.println();
+
+            return proxyInstance;
         }*/
 
-        System.out.println("postProcessAfterInitialization BeanName = " + s + o.toString());
-        System.out.println("map size = " + map.size());
+        showBeanInfo(o, s);
+        System.out.println();
 
         return o;
+    }
+
+    private void showBeanInfo(Object o, String s) {
+        System.out.println("BeanName = " + s);
+        System.out.println("BeanClass = " + o.getClass().getName());
+        System.out.println("map size = " + map.size());
     }
 }
